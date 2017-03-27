@@ -1,0 +1,26 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class sample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		WebDriver driver= new FirefoxDriver();
+		driver.manage().window().maximize();
+		
+		 driver.get("https://www.amazon.com");
+		//driver.findElement(By.id("twotabsearchtextbox")).sendKeys("toys");	}
+driver.findElement(By.name("field-keywords")).sendKeys("toys");
+
+driver.findElement(By.xpath(".//*[@id='nav-search']/form/div[2]/div/input")).click();
+driver.findElement(By.linkText("Generic Color Fidget16 Cube Relieves Stress & Anxiety Toy")).click();
+driver.findElement(By.name("submit.add-to-cart")).click();
+//Thread.sleep(5000);
+driver.close();
+
+
+	}
+
+}
