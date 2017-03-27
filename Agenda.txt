@@ -1,0 +1,13 @@
+First week March 5- March 12 & March 13- March 19
+Analysed the manual testing concepts and got grip on it.
+SDLC
+Different models 
+STLC 
+Different domains
+Java concepts
+SQL concepts
+And also,learned about selenium automation tool.
+Different elements
+Different frameworks
+Second week March 20- March 26 
+Started with bacis testing, used JAVA code with selenium web driver.
