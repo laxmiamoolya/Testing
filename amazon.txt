@@ -2,7 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class sample {
+
+public class Loginamazon {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -11,15 +12,30 @@ public class sample {
 		driver.manage().window().maximize();
 		
 		 driver.get("https://www.amazon.com");
-		//driver.findElement(By.id("twotabsearchtextbox")).sendKeys("toys");	}
-driver.findElement(By.name("field-keywords")).sendKeys("toys");
+	driver.findElement(By.xpath("//*[@id='nav-link-accountList']/span[1]")).click();
+	
+	driver.findElement(By.name("email")).sendKeys("lakshmiamoolya17@gmail.com");
+	driver.findElement(By.name("password")).sendKeys("amoolya17");
+	
+	driver.findElement(By.className("a-button-input")).click();
+	
+	driver.findElement(By.name("field-keywords")).sendKeys("toys");
 
-driver.findElement(By.xpath(".//*[@id='nav-search']/form/div[2]/div/input")).click();
-driver.findElement(By.linkText("Generic Color Fidget16 Cube Relieves Stress & Anxiety Toy")).click();
-driver.findElement(By.name("submit.add-to-cart")).click();
-//Thread.sleep(5000);
-driver.close();
-
+	driver.findElement(By.xpath(".//*[@id='nav-search']/form/div[2]/div/input")).click();
+	driver.findElement(By.linkText("Generic Color Fidget16 Cube Relieves Stress & Anxiety Toy")).click();
+	driver.findElement(By.name("submit.add-to-cart")).click();
+	//Thread.sleep(5000);
+	
+	
+		 
+		 
+	
+		
+		
+		
+		
+		
+		
 
 	}
 
