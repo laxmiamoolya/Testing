@@ -1,0 +1,147 @@
+package Frame ;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.Test;
+
+import Pages.FlipcartLogin;
+//import Pages.HomePage;
+import Pages.HomePage;
+
+public class LoginPage 
+
+{
+	
+	String browser="Firefox";
+public WebDriver driver;
+                                                                                   //ConfigReader cr= new ConfigReader();
+
+                                                                  //System.setProperty("webdriver.chrome.driver", cr.ChromeBrowser());
+                                                                       //driver.get(cr.Url());
+
+@Test
+public void Browser()
+{
+
+    if (browser.equalsIgnoreCase("Firefox"))
+  	  
+    {
+  	  driver = new FirefoxDriver();
+  	  
+    }
+    else if (browser.equalsIgnoreCase("ie"))
+  	  
+    {
+  	  
+  	  System.setProperty("webdriver.ie.driver","C:\\software by me\\IEDriverServer.exe");
+  	  driver = new InternetExplorerDriver();
+  	  
+    }
+    else if (browser.equalsIgnoreCase("Chrome"))
+    {
+  	  System.setProperty("webdriver.chrome.driver", "C:\\software by me\\chromedriver.exe");
+		 driver = new ChromeDriver();
+		
+    }
+
+	driver.get("https://www.yahoo.com/");
+	HomePage hp = new HomePage(driver);
+	hp.Search().sendKeys("yahoo");
+	
+	hp.Icon().click();
+	
+	FlipcartLogin fl= new FlipcartLogin(driver);
+	fl.Signin().click();
+	fl.Name().sendKeys("amul");
+	fl.Next().click();
+	
+
+	
+	
+	
+	
+}
+
+
+
+
+}
+-------------------------------------------------------------------
+package Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class FlipcartLogin {
+	WebDriver driver;
+	
+	public FlipcartLogin(WebDriver driver)
+	{
+		this.driver=driver;	
+	}
+	By signin= By.xpath(".//*[@id='yucs-login_signIn']");
+			
+	By name=By.id("login-username");
+	
+	By next= By.xpath(".//*[@type='submit']");
+	
+	public WebElement Signin()
+	{
+		return driver.findElement(signin);
+	}
+	
+	public WebElement Name()
+	{
+		return driver.findElement(name);
+		
+	}
+	
+	public WebElement Next()
+	{
+		return driver.findElement(next);
+	}
+	
+
+}
+----------------------------------------------------
+package Pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class HomePage {
+	
+	
+	WebDriver driver;
+	public HomePage(WebDriver driver)
+	{
+		this.driver=driver;	
+		PageFactory.initElements(driver, this);
+	}
+@FindBy(xpath=".//*[@id='uh-search-box']")
+WebElement search;
+
+@FindBy(xpath=".//*[@type='submit']")
+WebElement icon;
+
+	
+	
+	public WebElement Search()
+	{
+		return search;
+	}
+	
+	public WebElement Icon()
+	{
+		return icon;
+	}
+	
+
+}
+
+-----------------------------------------------------

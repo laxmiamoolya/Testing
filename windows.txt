@@ -1,0 +1,63 @@
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+
+public class Multiple {
+	@Test
+	public void handle_multiple_windows() throws Exception{
+		
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\software by me\\chromedriver.exe");
+		// Open browser
+		WebDriver driver=new ChromeDriver();
+		
+		// Load app
+		driver.get("https://accounts.google.com/SignUp?service=mail&continue=https://mail.google.com/mail/?pc=topnav-about-en");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+ 
+		// It will return the parent window name as a String
+		String parent=driver.getWindowHandle();
+		System.out.println("Before switching title is : "+driver.getTitle());
+		driver.findElement(By.xpath("//a[text()='Learn more']")).click();
+		
+		// This will return the number of windows opened by Webdriver and will return Set of Strings
+		Set<String>s1 = driver.getWindowHandles();
+		
+			
+		// Now we will iterate using Iterator
+		Iterator<String>I1= s1.iterator();
+		
+		while(I1.hasNext())
+		{
+		
+		   String child_window=I1.next();
+		
+		// Here we will compare if parent window is not equal to child window then we will close
+		//compared by auto generated id
+		
+		if(!parent.equalsIgnoreCase(child_window))
+		{
+		driver.switchTo().window(child_window);
+		//System.out.println("After switching title is : "+driver.getTitle());
+		Thread.sleep(10000);
+		//System.out.println(driver.switchTo().window(child_window).getTitle());
+			System.out.println("After switching title is : "+driver.getTitle());
+
+		driver.close();
+		}
+		
+		}
+		// once all pop up closed now switch to parent window
+		driver.switchTo().window(parent);
+		System.out.println("After switching title is : "+driver.getTitle());
+
+		}
+
+
+}
