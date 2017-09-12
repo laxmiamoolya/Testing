@@ -1,0 +1,154 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class southwestrt {
+
+	public static void main(String[] args) throws InterruptedException {
+		String date = "10";
+		String date1="20";
+		List<WebElement> productprice;
+		List<Integer> minimum=new ArrayList<>();
+		List<WebElement> productprice1;
+		List<Integer> minimum1=new ArrayList<>();
+		System.setProperty("webdriver.chrome.driver","C:\\RobotSetup\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.southwest.com/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.id("trip-type-round-trip"));
+		driver.findElement(By.xpath(".//*[@id='air-city-departure']")).sendKeys("MSP");
+		driver.findElement(By.id("air-city-arrival")).sendKeys("DALLAS");
+		driver.findElement(By.id("air-date-departure")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("calendar-october-"+date)).click();
+		driver.findElement(By.id("air-date-return")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("calendar-october-"+date1)).click();
+		driver.findElement(By.id("jb-booking-form-submit-button")).click();
+		productprice= driver.findElements(By.xpath(".//*[@id='faresOutbound']/tbody/tr/td[8]/descendant::div[@class='product_info']/label[@class='product_price']"));
+		for(WebElement we:productprice)		{
+			 minimum.add(Integer.parseInt(we.getText().substring(1)));
+		}
+		int i=minimum.get(0);
+		for(int j=1;j<minimum.size();j++)
+		{
+		if(minimum.get(j)<i)
+		{
+			i=minimum.get(j);
+			}
+		}
+		System.out.println(i);
+		
+		for(int k=0;k<productprice.size();k++)	{
+			if(Integer.parseInt(productprice.get(k).getText().substring(1))==i)
+			{
+				driver.findElement(By.id("Out"+(k+1)+"C")).click();
+				break;
+			}
+		}
+		productprice1= driver.findElements(By.xpath(".//*[@id='faresReturn']/tbody/tr/td[8]/descendant::div[@class='product_info']/label[@class='product_price']"));
+		for(WebElement we:productprice1)		{
+			 minimum1.add(Integer.parseInt(we.getText().substring(1)));
+		}
+		int n=minimum1.get(0);
+		for(int m=1;m<minimum1.size();m++)
+		{
+		if(minimum1.get(m)<n)
+		{
+			n=minimum1.get(m);
+			}
+		}
+		System.out.println(n);
+		
+		for(int l=0;l<productprice1.size();l++)	{
+			if(Integer.parseInt(productprice1.get(l).getText().substring(1))==n)
+			{
+				driver.findElement(By.id("In"+(l+1)+"C")).click();
+				break;
+			}
+		}
+		
+	driver.findElement(By.id("priceItinerarySubmit")).click();
+	driver.findElement(By.id("priceSubmitButton")).click();
+	driver.findElement(By.id("firstName0")).sendKeys("laxmi");
+	driver.findElement(By.id("lastName0")).sendKeys("koppolu");
+	Select s= new Select(driver.findElement(By.id("suffix0")));
+	s.selectByVisibleText("CEO");
+	Select s1= new Select(driver.findElement(By.id("dobMonth0")));
+	s1.selectByValue("1");
+	Select s2= new Select(driver.findElement(By.id("dobDay0")));
+	s2.selectByIndex(9);
+	Select s3= new Select(driver.findElement(By.id("dobYear0")));
+	s3.selectByVisibleText("2017");
+	Select s4= new Select(driver.findElement(By.id("gender0")));
+	s4.selectByVisibleText("Male");
+	
+	}
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+Return flight only
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class returnflight {
+	public static void main(String[] args) throws InterruptedException {
+		String date = "10";
+		String date1="20";
+		List<WebElement> productprice1;
+		List<Integer> minimum1=new ArrayList<>();
+		System.setProperty("webdriver.chrome.driver","C:\\RobotSetup\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.southwest.com/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.id("trip-type-round-trip")).click();
+		driver.findElement(By.xpath(".//*[@id='air-city-departure']")).sendKeys("MSP");
+		driver.findElement(By.id("air-city-arrival")).sendKeys("DALLAS");
+		driver.findElement(By.id("air-date-departure")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("calendar-october-"+date)).click();
+		driver.findElement(By.id("air-date-return")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("calendar-october-"+date1)).click();
+		driver.findElement(By.id("jb-booking-form-submit-button")).click();
+		productprice1= driver.findElements(By.xpath(".//*[@id='faresReturn']/tbody/tr/td[8]/descendant::div[@class='product_info']/label[@class='product_price']"));
+		for(WebElement we:productprice1)		{
+			 minimum1.add(Integer.parseInt(we.getText().substring(1)));
+		}
+		int n=minimum1.get(0);
+		for(int m=1;m<minimum1.size();m++)
+		{
+		if(minimum1.get(m)<n)
+		{
+			n=minimum1.get(m);
+			}
+		}
+		System.out.println(n);
+		
+		for(int l=0;l<productprice1.size();l++)	{
+			if(Integer.parseInt(productprice1.get(l).getText().substring(1))==n)
+			{
+				driver.findElement(By.id("In"+(l+1)+"C")).click();
+				break;
+			}
+		}
+		
+	}
+	
+}
+
